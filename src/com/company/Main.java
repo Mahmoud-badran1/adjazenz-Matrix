@@ -237,16 +237,74 @@ public class Main {
 
         int exNumber = ex[0][0];
 
+        int [][] maxArray = new int[ROWS][COLUMNS];
+        int [][] minArray = new int[ROWS][COLUMNS];
+
         for (int i = 0; i < ex.length; i++) {
             for (int j = 0; j < ex.length; j++) {
+                for (int k = 0; k < ex.length; k++) {
 
-                if (ex[i][j] > exNumber) {
-                    exNumber = ex[i][j];
-                    System.out.print(" " + exNumber);
+                    System.out.print(ex[i][k] + "");
+                    if  ( ex[i][k] > 2  ) {
+                        maxArray[i][k] = ex[i][k];
 
+                        //exNumber = ex[i][k];
+                        System.out.print("# ");
+                    }
+                }
+                System.out.println();
+
+            }
+
+            System.out.println("*****");
+        }
+
+
+        /*
+        the Exzentrität
+        + max value
+         */
+        for (int i = 0; i < maxArray.length ; i++) {
+            exNumber = 0;
+            for (int j = 0; j < maxArray.length; j++) {
+
+                if (maxArray[i][j] > exNumber) {
+                //    System.out.print(maxArray[i][j]+ " ");
+                    exNumber  = maxArray[i][j];
+                }
+                if (maxArray[i][j] < exNumber){
+                  //  System.out.print("#");
                 }
             }
-            System.out.println();
+
+            System.out.println( "Row= "+ (i+1)+" Extzrität : "+ exNumber);
         }
+
+     //   System.out.println("\n\n The Max Value is : " + exNumber);
+
+
+
+        int rad = 0;
+        int durchMesser = 0;
+        int zentrum = 0;
+
+        for (int i = 0; i < maxArray.length ; i++) {
+            exNumber = 0;
+            for (int j = 0; j < maxArray.length; j++) {
+                if (maxArray[i][j] > exNumber) {
+                    exNumber  = maxArray[i][j];
+                    if(exNumber == 3){
+                        rad = exNumber;
+                        zentrum = (i+1);
+
+                    } else if (exNumber == 6) {
+                        durchMesser = exNumber;
+                    }
+                }
+            }
+        }
+        System.out.print("\nder Durchmesser " + durchMesser);
+        System.out.print("\nder red " + rad);
+        System.out.print("\nder zentrum " + zentrum);
     }
 }
