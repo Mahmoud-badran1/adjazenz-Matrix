@@ -25,6 +25,8 @@ public class Main {
     private static final int ROWS = 11;
     private static final int COLUMNS = 11;
     private int[][] numArray;
+    int[][] wegMatrix = new int[ROWS][COLUMNS];
+
     int num = 0;
 
 
@@ -131,26 +133,11 @@ public class Main {
         System.out.println(" rechnen das Potenzmartrix: AG");
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length; j++) {
-
                 array[i][j] += numArray[i][j];
-
                 ex[i][j] += numArray[i][j];
-
-
             }
-
-
         }
-
-        /*
-        das gehört nur jz dazu
-        es sollte gelöscht werden und mit einer Bedinung z.b if array[i][i] != 0 dann stop
-        (innerhalb der 2te for)
-        todo 1
-         */
-        int exProben = 6;
-
-        for (int a = 1; a < exProben; a++) {
+        for (int a = 1; a < 6; a++) {
 
             for (int oo = 0; oo < result.length; oo++) {
                 for (int p = 0; p < result.length; p++) {
@@ -158,82 +145,76 @@ public class Main {
                     result[oo][p] = 0;
 
                     for (int k = 0; k < result.length; k++) {
-
                         result[oo][p] += array[oo][k] * numArray[k][p];
 
-
                     }
-
                 }
             }
-            System.out.println("*********************");
 
 
                 /*
-                PotenzMatrix
+                PotenzMatrix TODO
                  */
+
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result.length; j++) {
-
-
-                    System.out.print(result[i][j] + " ");
-
+                //    System.out.print(result[i][j] + " ");
                     array[i][j] = result[i][j];
-
-
                 }
-                System.out.println();
-
+              //  System.out.println();
             }
+
+
             System.out.println("\n----------- EX ------------- \n");
 
                 /*
                 Distance Matrix
                  */
 
+
             for (int i = 0; i < result.length; i++) {
                 for (int j = 0; j < result.length; j++) {
-
                     array[i][j] = result[i][j];
-
-
-                    //   System.out.print(result[i][j]);
                     if (result[i][j] != 0 && ex[i][j] == 0 && i != j) {
-                        ex[i][j] = (a+1);
-                        System.out.print( ex[i][j] +"");
+                        ex[i][j] = (a + 1);
+                        System.out.print(ex[i][j] + "");
                     } else {
                         System.out.print(ex[i][j]);
                     }
-
                     System.out.print(" ");
-
-                    //System.out.print(ex[i][j]+ " ");
                 }
                 System.out.println();
-
             }
-        }
+
+            System.out.println("\n----------- wegMatrix ------------- \n");
 
 
-        int maxValue = ex[0][0];
-        int zeile = 0;
-        for (int i = 0; i < ex.length; i++) {
-            for (int j = 0; j < ex.length; j++) {
-                if (ex[i][j] > maxValue) {
-                    zeile = i;
-                    maxValue = ex[i][j];
+            for (int i = 0; i < result.length; i++) {
+                for (int j = 0; j < result.length; j++) {
+                    array[i][j] = result[i][j];
+                    if (result[i][j] != 0 && wegMatrix[i][j] == 0) {
+                        wegMatrix[i][j] = 1;
+                        System.out.print(wegMatrix[i][j] + "");
+                    } else {
+                        System.out.print(wegMatrix[i][j]);
+                    }
+                    System.out.print(" ");
                 }
+                System.out.println();
             }
         }
 
-        System.out.println("\nzeile nummer "+ (zeile+1));
-        System.out.println("\nThe max value of ex: "+ maxValue);
 
 
 
 
-//        int exZentrität = ex[0][0];
 
+        /*
+        ex
+        DurchMesser
+        Rad
+        Zentrum
+         */
 
         int exNumber = ex[0][0];
 
@@ -243,21 +224,14 @@ public class Main {
         for (int i = 0; i < ex.length; i++) {
             for (int j = 0; j < ex.length; j++) {
                 for (int k = 0; k < ex.length; k++) {
-
-                    System.out.print(ex[i][k] + "");
                     if  ( ex[i][k] > 2  ) {
                         maxArray[i][k] = ex[i][k];
-
-                        //exNumber = ex[i][k];
-                        System.out.print("# ");
                     }
                 }
-                System.out.println();
-
             }
-
-            System.out.println("*****");
         }
+
+        System.out.println("\n\n-----------The numbers--------\n\n");
 
 
         /*
@@ -267,22 +241,14 @@ public class Main {
         for (int i = 0; i < maxArray.length ; i++) {
             exNumber = 0;
             for (int j = 0; j < maxArray.length; j++) {
-
                 if (maxArray[i][j] > exNumber) {
-                //    System.out.print(maxArray[i][j]+ " ");
                     exNumber  = maxArray[i][j];
                 }
                 if (maxArray[i][j] < exNumber){
-                  //  System.out.print("#");
                 }
             }
-
-            System.out.println( "Row= "+ (i+1)+" Extzrität : "+ exNumber);
+            System.out.println( "Knote= "+ (i+1)+" Extzrität : "+ exNumber);
         }
-
-     //   System.out.println("\n\n The Max Value is : " + exNumber);
-
-
 
         int rad = 0;
         int durchMesser = 0;
@@ -303,8 +269,14 @@ public class Main {
                 }
             }
         }
+
         System.out.print("\nder Durchmesser " + durchMesser);
         System.out.print("\nder red " + rad);
         System.out.print("\nder zentrum " + zentrum);
+
+
+
+        System.out.println("\n\n-----------End The numbers--------\n\n");
+
     }
 }
